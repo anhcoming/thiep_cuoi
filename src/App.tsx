@@ -14,6 +14,7 @@ import {
   Music2, 
   Camera, 
   Send, 
+  Gift,
   ChevronDown,
   CheckCircle2,
   ArrowUp,
@@ -49,10 +50,52 @@ const DoubleHappiness = ({ className, color = "text-red-600/10" }: { className?:
 
 const DecorativeAccent = ({ className, color = "#2D5A27" }: { className?: string; color?: string }) => (
   <div className={cn("absolute pointer-events-none select-none", className)}>
-    <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M60 0C60 0 65 45 110 55C65 65 60 110 60 110C60 110 55 65 10 55C55 45 60 0 60 0Z" fill={color} opacity="0.1" />
-      <circle cx="60" cy="60" r="2" fill={color} opacity="0.2" />
+    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0C30 0 60 30 60 60" stroke={color} strokeWidth="0.5" opacity="0.2" />
+      <path d="M0 10C25 10 50 35 50 60" stroke={color} strokeWidth="0.5" opacity="0.1" />
+      <path d="M10 0C10 25 35 50 60 50" stroke={color} strokeWidth="0.5" opacity="0.1" />
+      <circle cx="2" cy="2" r="1.5" fill={color} opacity="0.3" />
+      <path d="M0 0L15 15" stroke={color} strokeWidth="0.5" opacity="0.2" />
     </svg>
+  </div>
+);
+
+const LaceBorder = ({ className }: { className?: string }) => (
+  <div className={cn("absolute pointer-events-none select-none opacity-20", className)}>
+    <svg width="100%" height="20" viewBox="0 0 400 20" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 10L400 10" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 4" />
+      <path d="M0 0C10 0 10 10 20 10C30 10 30 0 40 0C50 0 50 10 60 10C70 10 70 0 80 0C90 0 90 10 100 10C110 10 110 0 120 0C130 0 130 10 140 10C150 10 150 0 160 0C170 0 170 10 180 10C190 10 190 0 200 0C210 0 210 10 220 10C230 10 230 0 240 0C250 0 250 10 260 10C270 10 270 0 280 0C290 0 290 10 300 10C310 10 310 0 320 0C330 0 330 10 340 10C350 10 350 0 360 0C370 0 370 10 380 10C390 10 390 0 400 0" stroke="currentColor" strokeWidth="0.5" />
+      <circle cx="20" cy="15" r="1" fill="currentColor" />
+      <circle cx="60" cy="15" r="1" fill="currentColor" />
+      <circle cx="100" cy="15" r="1" fill="currentColor" />
+      <circle cx="140" cy="15" r="1" fill="currentColor" />
+      <circle cx="180" cy="15" r="1" fill="currentColor" />
+      <circle cx="220" cy="15" r="1" fill="currentColor" />
+      <circle cx="260" cy="15" r="1" fill="currentColor" />
+      <circle cx="300" cy="15" r="1" fill="currentColor" />
+      <circle cx="340" cy="15" r="1" fill="currentColor" />
+      <circle cx="380" cy="15" r="1" fill="currentColor" />
+    </svg>
+  </div>
+);
+
+const BotanicalAccent = ({ className, color = "#2D5A27" }: { className?: string; color?: string }) => (
+  <div className={cn("absolute pointer-events-none select-none opacity-[0.08]", className)}>
+    <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 110C10 110 20 60 60 40C100 20 110 10 110 10" stroke={color} strokeWidth="0.5" />
+      <path d="M60 40C60 40 70 30 85 35C100 40 105 55 105 55C105 55 90 60 75 55C60 50 60 40 60 40Z" fill={color} />
+      <path d="M40 60C40 60 30 55 25 40C20 25 35 20 35 20C35 20 40 35 35 50C30 65 40 60 40 60Z" fill={color} />
+      <path d="M20 85C20 85 10 80 5 65C0 50 15 45 15 45C15 45 20 60 15 75C10 90 20 85 20 85Z" fill={color} />
+      <circle cx="110" cy="10" r="1.5" fill={color} />
+    </svg>
+  </div>
+);
+
+const SectionDivider = ({ className }: { className?: string }) => (
+  <div className={cn("flex items-center justify-center gap-4 py-2", className)}>
+    <div className="w-12 h-px bg-wedding-accent/20" />
+    <div className="w-2 h-2 rotate-45 border border-wedding-accent/40" />
+    <div className="w-12 h-px bg-wedding-accent/20" />
   </div>
 );
 
@@ -96,14 +139,10 @@ const GALLERY_IMAGES = [
 const FloatingHearts = () => {
   const [hearts, setHearts] = useState<{ id: number; left: number; size: number; duration: number; delay: number; color: string }[]>([]);
   const colors = [
-    'text-red-400/30',
-    'text-pink-400/30',
-    'text-rose-400/30',
-    'text-orange-300/30',
-    'text-red-300/30',
-    'text-pink-300/30',
-    'text-red-500/20',
-    'text-pink-500/20'
+    'text-wedding-accent/60',
+    'text-wedding-accent/40',
+    'text-wedding-grey/60',
+    'text-wedding-grey/40'
   ];
 
   useEffect(() => {
@@ -111,18 +150,18 @@ const FloatingHearts = () => {
       const newHeart = {
         id: Date.now() + Math.random(),
         left: Math.random() * 100,
-        size: Math.random() * (25 - 8) + 8,
-        duration: Math.random() * (25 - 15) + 15,
-        delay: Math.random() * 2,
+        size: Math.random() * (24 - 10) + 10,
+        duration: Math.random() * (12 - 6) + 6,
+        delay: Math.random() * 0.2,
         color: colors[Math.floor(Math.random() * colors.length)]
       };
-      setHearts(prev => [...prev.slice(-20), newHeart]);
+      setHearts(prev => [...prev.slice(-15), newHeart]);
     }, 800);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden">
+    <div className="fixed inset-0 pointer-events-none z-[150] overflow-hidden">
       <AnimatePresence>
         {hearts.map(heart => (
           <motion.div
@@ -130,20 +169,16 @@ const FloatingHearts = () => {
             initial={{ y: '110vh', opacity: 0, scale: 0, x: 0 }}
             animate={{ 
               y: '-10vh', 
-              opacity: [0, 0.5, 0.5, 0],
+              opacity: [0, 0.4, 0.4, 0],
               scale: [0.5, 1, 0.8, 1],
-              x: [0, 15, -15, 15, 0]
+              x: [0, 15, -15, 15, 0],
+              rotate: [0, 10, -10, 10, 0]
             }}
             exit={{ opacity: 0 }}
             transition={{ 
               duration: heart.duration, 
               delay: heart.delay,
-              ease: "linear",
-              x: {
-                duration: heart.duration / 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }
+              ease: "linear"
             }}
             className={twMerge("absolute", heart.color)}
             style={{ left: `${heart.left}%` }}
@@ -276,11 +311,11 @@ const WeddingSchedule = () => {
   ];
 
   return (
-    <div className="relative max-w-4xl mx-auto py-4 md:py-8 px-4">
+    <div className="relative max-w-4xl mx-auto py-2 md:py-4 px-4">
       {/* Vertical Line */}
       <div className="absolute left-1/2 top-0 bottom-0 w-px bg-wedding-accent/10 -translate-x-1/2 hidden md:block" />
       
-      <div className="space-y-4 md:space-y-8">
+      <div className="space-y-2 md:space-y-4">
         {items.map((item, idx) => (
           <motion.div 
             key={idx}
@@ -385,18 +420,18 @@ const CountdownTimer = () => {
 };
 
 const SectionTitle = ({ title, subtitle, align = 'center' }: { title: string; subtitle?: string; align?: 'center' | 'left' }) => (
-  <div className={cn("mb-6 md:mb-8 px-4", align === 'center' ? "text-center" : "text-left")}>
+  <div className={cn("mb-6 md:mb-10 px-4", align === 'center' ? "text-center" : "text-left")}>
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="inline-block mb-2 md:mb-4"
+      className="inline-block mb-4"
     >
-      <div className={cn("flex flex-col gap-2 md:gap-3", align === 'center' ? "items-center" : "items-start")}>
-        <div className="flex items-center gap-4">
-          <div className="w-10 h-px bg-wedding-accent/30" />
-          <span className="aesthetic-text !text-wedding-accent tracking-wider">Invitation</span>
-          <div className="w-10 h-px bg-wedding-accent/30" />
+      <div className={cn("flex flex-col gap-3", align === 'center' ? "items-center" : "items-start")}>
+        <div className="flex items-center gap-6">
+          <div className="w-12 h-px bg-wedding-accent/20" />
+          <span className="aesthetic-text !text-wedding-accent tracking-[0.4em] uppercase font-bold text-[10px]">Invitation</span>
+          <div className="w-12 h-px bg-wedding-accent/20" />
         </div>
       </div>
     </motion.div>
@@ -405,7 +440,7 @@ const SectionTitle = ({ title, subtitle, align = 'center' }: { title: string; su
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: 0.1 }}
-      className="text-3xl md:text-7xl elegant-title text-wedding-ink mb-4 md:mb-6 leading-tight"
+      className="text-4xl md:text-7xl elegant-title text-wedding-ink mb-6 leading-tight drop-shadow-sm"
     >
       {title}
     </motion.h2>
@@ -413,13 +448,16 @@ const SectionTitle = ({ title, subtitle, align = 'center' }: { title: string; su
       <motion.p 
         transition={{ delay: 0.2 }}
         className={cn(
-          "text-wedding-grey font-serif text-lg md:text-xl max-w-2xl leading-relaxed font-light italic",
+          "text-wedding-grey font-serif text-lg md:text-xl max-w-2xl leading-relaxed font-light italic opacity-80",
           align === 'center' ? "mx-auto" : ""
         )}
       >
         {subtitle}
       </motion.p>
     )}
+    <div className={cn("mt-4 flex", align === 'center' ? "justify-center" : "justify-start")}>
+      <div className="w-8 h-px bg-wedding-accent/10" />
+    </div>
   </div>
 );
 
@@ -443,17 +481,17 @@ const EventCard = ({
   <motion.div 
     whileHover={{ y: -10 }}
     transition={{ type: "spring", stiffness: 200, damping: 20 }}
-    className="glass-card p-8 md:p-12 rounded-[40px] flex flex-col items-center text-center relative overflow-hidden group"
+    className="glass-card p-6 md:p-8 rounded-[40px] flex flex-col items-center text-center relative overflow-hidden group"
   >
     <div className="absolute top-0 right-0 w-32 h-32 bg-wedding-accent/5 rounded-bl-full -z-10 transition-transform group-hover:scale-110" />
     
-    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white shadow-xl flex items-center justify-center mb-6 md:mb-10 border border-wedding-accent/5">
+    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white shadow-xl flex items-center justify-center mb-4 md:mb-6 border border-wedding-accent/5">
       <Calendar className="w-6 h-6 md:w-8 md:h-8 text-wedding-accent" strokeWidth={1} />
     </div>
     
-    <h3 className="text-2xl md:text-4xl elegant-title text-wedding-ink mb-6 md:mb-10">{type}</h3>
+    <h3 className="text-2xl md:text-4xl elegant-title text-wedding-ink mb-4 md:mb-6">{type}</h3>
     
-    <div className="space-y-6 md:space-y-8 mb-8 md:mb-12 w-full">
+    <div className="space-y-4 md:space-y-6 mb-6 md:mb-8 w-full">
       <div className="flex flex-col gap-2">
         <span className="aesthetic-text !text-wedding-accent/40 tracking-wider">Time & Date</span>
         <div className="flex flex-col gap-1">
@@ -484,6 +522,45 @@ const EventCard = ({
     </a>
   </motion.div>
 );
+
+const Guestbook = () => {
+  const messages = [
+    { name: "Gia đình Bác Hùng", message: "Chúc hai cháu trăm năm hạnh phúc, sớm sinh quý tử nhé!", date: "2 giờ trước" },
+    { name: "Bạn thân Đại học", message: "Cuối cùng cũng chịu lấy vợ rồi à? Chúc mừng hai bạn nhé, mãi hạnh phúc nha!", date: "5 giờ trước" },
+    { name: "Chị Lan Anh", message: "Đám cưới đẹp quá, chúc hai em luôn yêu thương nhau như ngày đầu.", date: "1 ngày trước" },
+  ];
+
+  return (
+    <div className="space-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {messages.map((msg, idx) => (
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: idx * 0.1 }}
+            className="glass-card p-6 rounded-3xl border border-wedding-accent/5 relative overflow-hidden group"
+          >
+            <div className="absolute top-0 right-0 w-16 h-16 bg-wedding-accent/5 rounded-bl-full -z-10" />
+            <div className="flex flex-col h-full">
+              <p className="text-wedding-ink/80 font-serif italic text-lg mb-4 leading-relaxed">"{msg.message}"</p>
+              <div className="mt-auto flex items-center justify-between border-t border-wedding-accent/10 pt-4">
+                <span className="aesthetic-text !text-wedding-ink font-bold text-[10px] uppercase tracking-wider">{msg.name}</span>
+                <span className="text-[10px] text-wedding-grey font-serif italic">{msg.date}</span>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+      <div className="text-center mt-12">
+        <button className="px-8 py-3 rounded-full border border-wedding-accent/20 text-wedding-accent aesthetic-text !text-wedding-accent hover:bg-wedding-accent hover:text-white transition-all text-sm">
+          Xem tất cả lời chúc
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const BentoGallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -522,6 +599,7 @@ const BentoGallery = () => {
             <img 
               src={img.src} 
               alt={img.caption} 
+              loading="lazy"
               className="w-full h-full object-cover object-[center_15%] transition-transform duration-1000 group-hover:scale-110 grayscale-[0.1] group-hover:grayscale-0"
               referrerPolicy="no-referrer"
             />
@@ -652,11 +730,11 @@ const Timeline = () => {
   ];
 
   return (
-    <div className="relative max-w-5xl mx-auto px-6 py-12">
+    <div className="relative max-w-5xl mx-auto px-6 py-4">
       {/* Vertical Line */}
       <div className="absolute left-1/2 top-0 bottom-0 w-px bg-wedding-accent/10 -translate-x-1/2 hidden md:block" />
       
-      <div className="space-y-16">
+      <div className="space-y-8">
         {events.map((event, idx) => (
           <motion.div 
             key={idx}
@@ -675,7 +753,7 @@ const Timeline = () => {
                 "relative w-full aspect-square max-w-[340px] overflow-hidden shadow-2xl transition-transform duration-700 hover:scale-105",
                 idx % 2 === 0 ? "rounded-[80px_20px_80px_20px]" : "rounded-[20px_80px_20px_80px]"
               )}>
-                 <img src={event.img} alt={event.title} className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700" referrerPolicy="no-referrer" />
+                 <img src={event.img} alt={event.title} loading="lazy" className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700" referrerPolicy="no-referrer" />
                 <div className="absolute inset-0 bg-wedding-accent/10 mix-blend-overlay" />
               </div>
             </div>
@@ -748,39 +826,35 @@ const Envelope = ({ onOpen, isPlaying, onToggleMusic, playMusic }: { onOpen: () 
       transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
       className="absolute inset-0 z-[100] bg-[#FDFBF7] flex items-center justify-center overflow-hidden p-6"
     >
-      <Watermark className="top-0 left-0 opacity-[0.02]" />
-      <Watermark className="bottom-0 right-0 opacity-[0.02] rotate-180" />
-      <Watermark className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.01] scale-150" />
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#2D5A27 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       
-      {/* Double Happiness Decorations */}
-      <DoubleHappiness className="top-10 left-10 -rotate-12" />
-      <DoubleHappiness className="bottom-10 right-10 rotate-12" color="text-wedding-accent/10" />
-      <DoubleHappiness className="top-1/4 right-20 rotate-6 scale-75 opacity-[0.05]" />
-      <DoubleHappiness className="bottom-1/4 left-20 -rotate-6 scale-75 opacity-[0.05]" color="text-yellow-600/10" />
-
-      {/* Green and Gold Accents */}
-      <DecorativeAccent className="top-0 right-0 -translate-y-1/4 translate-x-1/4" color="#2D5A27" />
-      <DecorativeAccent className="bottom-0 left-0 translate-y-1/4 -translate-x-1/4" color="#D4AF37" />
-      <DecorativeAccent className="top-1/3 left-10 scale-50" color="#D4AF37" />
-      <DecorativeAccent className="bottom-1/3 right-10 scale-50" color="#2D5A27" />
-
-      <Watermark className="-top-20 -left-20 rotate-12" />
-      <Watermark className="-bottom-20 -right-20 -rotate-12" />
+      {/* Formal Frame */}
+      <div className="absolute inset-8 border border-wedding-accent/10 pointer-events-none" />
+      <div className="absolute inset-10 border-[0.5px] border-wedding-accent/5 pointer-events-none" />
       
-      <div className="max-w-lg w-full text-center space-y-16 relative z-10 translate-y-12 md:translate-y-20">
+      {/* Corner Decorations */}
+      <DecorativeAccent className="top-4 left-4" color="#2D5A27" />
+      <DecorativeAccent className="top-4 right-4 rotate-90" color="#2D5A27" />
+      <DecorativeAccent className="bottom-4 left-4 -rotate-90" color="#2D5A27" />
+      <DecorativeAccent className="bottom-4 right-4 rotate-180" color="#2D5A27" />
+      
+      <Watermark className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.01] scale-[2]" />
+      
+      <div className="max-w-lg w-full text-center space-y-8 relative z-10 translate-y-12 md:translate-y-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2 }}
-          className="space-y-6"
+          className="space-y-4"
         >
-          <div className="space-y-2">
-            <h2 className="text-6xl md:text-7xl script-text">Save our date</h2>
-            <p className="aesthetic-text tracking-[0.3em] opacity-60">Đức Anh & Phạm Nga</p>
+          <div className="space-y-1">
+            <h2 className="text-5xl md:text-6xl script-text !text-wedding-accent/80">Save our date</h2>
+            <p className="aesthetic-text tracking-[0.4em] opacity-40">Đức Anh & Phạm Nga</p>
           </div>
         </motion.div>
 
-        <div className="envelope-wrapper relative flex flex-col items-center space-y-16">
+        <div className="envelope-wrapper relative flex flex-col items-center space-y-10">
           <motion.div 
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ 
@@ -802,14 +876,19 @@ const Envelope = ({ onOpen, isPlaying, onToggleMusic, playMusic }: { onOpen: () 
           >
             {/* Flap */}
             <motion.div 
-              className="envelope-flap"
+              className="envelope-flap overflow-hidden"
               animate={{ rotateX: isOpening ? 180 : 0 }}
               transition={{ duration: 1.2, ease: [0.645, 0.045, 0.355, 1] }}
               style={{ zIndex: isOpening ? 0 : 3 }}
-            />
+            >
+              <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#2D5A27 1px, transparent 1px)', backgroundSize: '10px 10px' }} />
+            </motion.div>
             
             {/* Front */}
-            <div className="envelope-front" />
+            <div className="envelope-front overflow-hidden">
+              <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#2D5A27 1px, transparent 1px)', backgroundSize: '15px 15px' }} />
+              <LaceBorder className="bottom-0 left-0 w-full text-wedding-accent opacity-30" />
+            </div>
 
             {/* Polaroid Card inside */}
             <motion.div 
@@ -844,7 +923,7 @@ const Envelope = ({ onOpen, isPlaying, onToggleMusic, playMusic }: { onOpen: () 
             >
               <div className="wax-seal bg-[#8B7355] border-2 border-[#705E45]">
                 <div className="w-8 h-8 border border-white/20 rounded-full flex items-center justify-center">
-                  <Heart className="w-4 h-4 text-white/80" fill="currentColor" />
+                  <DoubleHappiness className="scale-[0.4] text-white/90" />
                 </div>
               </div>
             </motion.div>
@@ -869,7 +948,7 @@ const Envelope = ({ onOpen, isPlaying, onToggleMusic, playMusic }: { onOpen: () 
               exit={{ opacity: 0 }}
               animate={{ opacity: [0.4, 1, 0.4] }}
               transition={{ repeat: Infinity, duration: 2 }}
-              className="pt-12"
+              className="pt-8"
             >
               <p className="aesthetic-text !text-[10px] tracking-[0.4em]">Chạm để mở thiệp</p>
             </motion.div>
@@ -983,215 +1062,7 @@ const ScrollToTopButton = ({ onClick }: { onClick: () => void }) => {
   );
 };
 
-const ReactionButton = () => {
-  const [reactions, setReactions] = useState<any[]>([]);
-  const [showMenu, setShowMenu] = useState(false);
-  const nextId = useRef(0);
-  const containerRef = useRef<HTMLDivElement>(null);
 
-  const emojis = ['❤️', '🎉', '💍', '👍', '😍'];
-
-  // Handle auto-collapse on scroll or outside click
-  useEffect(() => {
-    if (!showMenu) return;
-
-    const handleScroll = () => setShowMenu(false);
-    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        setShowMenu(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
-    };
-  }, [showMenu]);
-
-  const addReaction = (emoji: string) => {
-    let newReactions: any[] = [];
-
-    if (emoji === '❤️' || emoji === '💍') {
-      // RAIN EFFECT: Falls from top
-      newReactions = Array.from({ length: 15 }).map(() => ({
-        id: nextId.current++,
-        emoji,
-        type: 'rain',
-        startX: Math.random() * window.innerWidth,
-        fallDistance: window.innerHeight + 100,
-        sway: (Math.random() - 0.5) * 200,
-        rotate: (Math.random() - 0.5) * 720,
-        scale: 0.6 + Math.random() * 0.8,
-        duration: 3 + Math.random() * 2
-      }));
-    } else if (emoji === '🎉') {
-      // FIREWORK EFFECT: Bursts from center
-      newReactions = Array.from({ length: 16 }).map((_, i) => {
-        const angle = (i / 16) * Math.PI * 2;
-        const velocity = 200 + Math.random() * 250;
-        return {
-          id: nextId.current++,
-          emoji,
-          type: 'firework',
-          targetX: Math.cos(angle) * velocity,
-          targetY: Math.sin(angle) * velocity - 100,
-          rotate: (Math.random() - 0.5) * 360,
-          scale: 0.8 + Math.random() * 1.2,
-          drift: (Math.random() - 0.5) * 100
-        };
-      });
-    } else {
-      // FOUNTAIN EFFECT: Shoots from bottom up (for 💖, 👍, 😍)
-      newReactions = Array.from({ length: 12 }).map(() => ({
-        id: nextId.current++,
-        emoji,
-        type: 'fountain',
-        x: (Math.random() - 0.8) * 400,
-        y: -400 - Math.random() * 400,
-        rotate: (Math.random() - 0.5) * 360,
-        scale: 0.8 + Math.random() * 1.2
-      }));
-    }
-
-    setReactions(prev => [...prev, ...newReactions]);
-    
-    // Cleanup
-    const cleanupTime = emoji === '❤️' || emoji === '💍' ? 6000 : 4000;
-    setTimeout(() => {
-      const idsToRemove = newReactions.map(r => r.id);
-      setReactions(prev => prev.filter(r => !idsToRemove.includes(r.id)));
-    }, cleanupTime);
-  };
-
-  return (
-    <div className="relative pointer-events-auto" ref={containerRef}>
-      {/* Global Rain Container - Still fixed to viewport */}
-      <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden">
-        <AnimatePresence>
-          {reactions.filter(r => r.type === 'rain').map(r => (
-            <motion.div
-              key={r.id}
-              initial={{ x: r.startX, y: -100, opacity: 0, scale: 0 }}
-              animate={{ 
-                y: r.fallDistance,
-                x: r.startX + r.sway,
-                opacity: [0, 1, 1, 0],
-                scale: [0, r.scale, r.scale, 0],
-                rotate: r.rotate
-              }}
-              transition={{ duration: r.duration, ease: "linear", times: [0, 0.1, 0.9, 1] }}
-              className="absolute text-4xl select-none drop-shadow-lg"
-              style={{ left: 0, top: 0 }}
-            >
-              {r.emoji}
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </div>
-
-      {/* Local Explosion Container - Relative to button */}
-      <div className="absolute inset-0 pointer-events-none z-[100]">
-        <AnimatePresence>
-          {reactions.filter(r => r.type !== 'rain').map(r => {
-            if (r.type === 'firework') {
-              return (
-                <motion.div
-                  key={r.id}
-                  initial={{ x: 0, y: 0, opacity: 0, scale: 0 }}
-                  animate={{ 
-                    x: [0, r.targetX, r.targetX + r.drift],
-                    y: [0, r.targetY, r.targetY - 200],
-                    opacity: [0, 1, 1, 0],
-                    scale: [0, r.scale, r.scale * 1.2, 0],
-                    rotate: [0, r.rotate, r.rotate * 2]
-                  }}
-                  transition={{ 
-                    duration: 3, 
-                    ease: [0.22, 1, 0.36, 1],
-                    times: [0, 0.2, 0.8, 1]
-                  }}
-                  className="absolute text-4xl select-none drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
-                  style={{ left: '50%', top: '50%', marginLeft: '-1.5rem', marginTop: '-1.5rem' }}
-                >
-                  {r.emoji}
-                </motion.div>
-              );
-            } else {
-              // Fountain
-              return (
-                <motion.div
-                  key={r.id}
-                  initial={{ x: 0, y: 0, opacity: 0, scale: 0 }}
-                  animate={{ 
-                    x: r.x,
-                    y: r.y,
-                    opacity: [0, 1, 1, 0],
-                    scale: [0, r.scale, r.scale * 0.5, 0],
-                    rotate: r.rotate
-                  }}
-                  transition={{ 
-                    duration: 2.5, 
-                    ease: [0.1, 0.8, 0.3, 1],
-                    times: [0, 0.1, 0.8, 1]
-                  }}
-                  className="absolute text-4xl select-none drop-shadow-xl"
-                  style={{ left: '50%', top: '50%', marginLeft: '-1.5rem', marginTop: '-1.5rem' }}
-                >
-                  {r.emoji}
-                </motion.div>
-              );
-            }
-          })}
-        </AnimatePresence>
-      </div>
-
-      <div className="relative">
-        <AnimatePresence>
-          {showMenu && (
-            <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.8 }}
-              animate={{ opacity: 1, y: -10, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.8 }}
-              className="absolute bottom-full left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md rounded-full p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.15)] border border-wedding-accent/10 flex flex-col gap-1 z-50 mb-2"
-            >
-              {emojis.map(emoji => (
-                <motion.button
-                  key={emoji}
-                  whileHover={{ scale: 1.3 }}
-                  whileTap={{ scale: 0.8 }}
-                  onClick={() => addReaction(emoji)}
-                  className="text-2xl p-1 leading-none hover:bg-wedding-accent/5 rounded-full transition-colors"
-                >
-                  {emoji}
-                </motion.button>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          animate={showMenu ? { rotate: [0, -10, 10, 0] } : { rotate: 0 }}
-          transition={showMenu ? { duration: 0.5 } : {}}
-          onClick={() => setShowMenu(!showMenu)}
-          className={cn(
-            "w-12 h-12 rounded-full bg-white shadow-[0_15px_35px_rgba(0,0,0,0.15)] flex items-center justify-center text-wedding-accent border-[3px] border-wedding-accent/10 transition-all duration-300",
-            showMenu && "bg-wedding-accent text-white border-white/20 scale-110"
-          )}
-          aria-label="Reactions"
-        >
-          <Heart className={cn("w-6 h-6 transition-all duration-300", showMenu ? "fill-white scale-110" : "fill-none")} />
-        </motion.button>
-      </div>
-    </div>
-  );
-};
 
 const ConfigPage = () => {
   const [recipient, setRecipient] = useState('');
@@ -1347,6 +1218,8 @@ export default function App() {
   });
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [openGroomBox, setOpenGroomBox] = useState(false);
+  const [openBrideBox, setOpenBrideBox] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [selectedQR, setSelectedQR] = useState<{src: string, name: string} | null>(null);
   const [brideHouseMapUrl, setBrideHouseMapUrl] = useState("https://www.google.com/maps/place/20%C2%B040'33.4%22N+106%C2%B001'20.8%22E/@20.6759104,106.0217952,19.04z/data=!4m4!3m3!8m2!3d20.6759524!4d106.022434!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDMxNS4wIKXMDSoASAFQAw%3D%3D");
@@ -1520,7 +1393,7 @@ export default function App() {
             {/* Fixed Bottom Controls Container (Reactions & Scroll to Top) */}
             <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-full max-w-[768px] px-6 z-50 pointer-events-none flex justify-end">
               <div className="flex flex-col items-center gap-3 pointer-events-auto">
-                <ReactionButton />
+
                 <AnimatePresence>
                   {showBackToTop && (
                     <ScrollToTopButton onClick={scrollToTop} />
@@ -1567,7 +1440,6 @@ export default function App() {
 
             {/* Hero Section */}
             <section className="relative min-h-screen flex flex-col items-center justify-between overflow-hidden bg-white md:max-h-[700px]">
-              <FloatingHearts />
               <motion.div 
                 style={{ opacity, scale }}
                 className="absolute inset-0 z-0"
@@ -1655,7 +1527,10 @@ export default function App() {
             </section>
 
             {/* Groom & Bride Section */}
-            <section className="py-20 px-6 bg-white overflow-hidden">
+            <section className="py-8 px-6 bg-white overflow-hidden relative">
+              <BotanicalAccent className="top-0 right-0 -translate-y-1/4 translate-x-1/4 rotate-90" />
+              <BotanicalAccent className="bottom-0 left-0 translate-y-1/4 -translate-x-1/4 -rotate-90" />
+              
               <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                   {/* Groom */}
@@ -1669,6 +1544,7 @@ export default function App() {
                       <img 
                         src="/images/b.png"
                         alt="Groom" 
+                        loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                         referrerPolicy="no-referrer"
                       />
@@ -1694,6 +1570,7 @@ export default function App() {
                       <img
                           src="/images/9.png"
                           alt="Bride"
+                          loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                         referrerPolicy="no-referrer"
                       />
@@ -1712,7 +1589,8 @@ export default function App() {
             </section>
 
             {/* Invitation Text */}
-            <section className="relative py-12 md:py-24 px-6 overflow-hidden bg-white">
+            <SectionDivider />
+            <section className="relative py-6 md:py-12 px-6 overflow-hidden bg-white">
               <Watermark className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.015] scale-150" />
               <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
@@ -1756,7 +1634,7 @@ export default function App() {
             </section>
 
             {/* Quote Section */}
-            <section className="relative py-16 md:py-32 px-6 overflow-hidden flex items-center justify-center bg-wedding-ink">
+            <section className="relative py-6 md:py-12 px-6 overflow-hidden flex items-center justify-center bg-wedding-ink">
               <div className="absolute inset-0 z-0">
                 <img
                     src="/images/1.jpg"
@@ -1789,7 +1667,8 @@ export default function App() {
             </section>
 
             {/* Love Story Section */}
-            <section className="py-16 px-4 relative overflow-hidden">
+            <SectionDivider />
+            <section className="py-8 px-4 relative overflow-hidden">
               <Watermark className="top-0 left-0 opacity-[0.02]" />
               <Watermark className="bottom-0 right-0 opacity-[0.02] rotate-180" />
               <div className="max-w-6xl mx-auto">
@@ -1799,7 +1678,8 @@ export default function App() {
             </section>
 
             {/* Calendar Section */}
-            <section className="py-16 bg-white px-4">
+            <SectionDivider />
+            <section className="py-8 bg-white px-4">
               <div className="max-w-4xl mx-auto text-center">
                 <SectionTitle title="Lịch cưới chúng mình!" subtitle="Hãy lưu lại ngày trọng đại này nhé" />
                 <WeddingCalendar />
@@ -1807,15 +1687,20 @@ export default function App() {
             </section>
 
             {/* Schedule Section */}
-            <section className="py-10 px-4">
+            <SectionDivider />
+            <section className="py-8 bg-[#FDFBF7] px-4 relative overflow-hidden">
+              <BotanicalAccent className="top-0 left-0 -translate-y-1/4 -translate-x-1/4" />
+              <BotanicalAccent className="bottom-0 right-0 translate-y-1/4 translate-x-1/4 rotate-180" />
               <div className="max-w-4xl mx-auto text-center">
                 <SectionTitle title="Chương trình tiệc" subtitle="Cùng chung vui trong ngày hạnh phúc" />
                 <WeddingSchedule />
               </div>
             </section>
 
-            {/* Event Details */}
-            <section className="py-16 bg-white px-4">
+            {/* Event Details Section */}
+            <SectionDivider />
+            <section className="py-8 bg-white px-4 relative overflow-hidden">
+              <Watermark className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.01] scale-125" />
               <div className="max-w-6xl mx-auto">
                 <SectionTitle title="Thời Gian & Địa Điểm" subtitle="Rất hân hạnh được đón tiếp" />
                 
@@ -1843,235 +1728,173 @@ export default function App() {
                 </div>
               </section>
 
-            {/* Gallery */}
-            <section className="py-16 px-4 bg-[#fcfcfc]">
+            {/* Gallery Section */}
+            <SectionDivider />
+            <section className="py-8 bg-[#FDFBF7] px-4 relative overflow-hidden">
+              <BotanicalAccent className="top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 -rotate-90 opacity-20" />
+              <BotanicalAccent className="top-1/2 right-0 -translate-y-1/2 translate-x-1/2 rotate-90 opacity-20" />
               <div className="max-w-7xl mx-auto">
                 <SectionTitle title="Wedding Gallery" subtitle="Lưu giữ những khoảnh khắc hạnh phúc nhất" />
                 <BentoGallery />
               </div>
             </section>
 
-            {/* RSVP Form */}
-            <section className="py-10 bg-[#1a3317] text-white px-6 relative overflow-hidden">
-              <div className="absolute inset-0 z-0 opacity-20">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_2px_2px,_var(--color-wedding-accent)_1px,_transparent_0)] bg-[size:40px_40px]" />
-              </div>
-              <div className="max-w-5xl mx-auto relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                  <div className="lg:col-span-5">
-                    <div className="sticky top-24 text-center lg:text-left flex flex-col items-center lg:items-start">
-                      <div className="flex items-center gap-4 mb-3">
-                        <div className="w-12 h-px bg-wedding-accent/40 hidden lg:block" />
-                        <div className="w-12 h-px bg-wedding-accent/40 lg:hidden" />
-                      </div>
-                      <h2 className="text-3xl md:text-5xl elegant-title mb-3 text-white leading-tight">Xác Nhận <br /> Tham Dự</h2>
-                      <p className="text-white/60 font-serif font-light text-base leading-relaxed italic max-w-sm lg:max-w-none">
-                        Sự hiện diện của bạn là niềm hạnh phúc lớn nhất đối với chúng tôi.
-                      </p>
-                      <div className="mt-4 md:mt-6 w-24 h-px bg-wedding-accent/20" />
-                    </div>
+            {/* Wedding Gift Section */}
+            <SectionDivider />
+            <section className="py-12 bg-white px-4 relative overflow-hidden">
+              <div className="max-w-5xl mx-auto text-center">
+                <SectionTitle title="Gửi Lời Chúc & Quà Tặng" subtitle="Sự hiện diện của bạn là món quà lớn nhất, nhưng nếu bạn muốn gửi lời chúc riêng..." />
+                
+                <div className="mt-12 grid grid-cols-2 gap-4 md:gap-12 w-full max-w-3xl mx-auto px-2">
+                  {/* Groom Side Card */}
+                  <div className="relative h-[280px] md:h-[380px] group">
+                    <motion.div 
+                      className="absolute inset-0 bg-wedding-sage/10 rounded-[2.5rem] border border-wedding-accent/5 flex flex-col items-center justify-center cursor-pointer overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                      onClick={() => !openGroomBox && setOpenGroomBox(true)}
+                      whileHover={{ scale: 1.01 }}
+                    >
+                      {/* Background Pattern */}
+                      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+                           style={{ backgroundImage: 'radial-gradient(circle, #2D5A27 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
+                      
+                      {/* Cover Content */}
+                      <motion.div 
+                        animate={{ 
+                          y: openGroomBox ? -40 : 0, 
+                          opacity: openGroomBox ? 0 : 1,
+                          scale: openGroomBox ? 0.9 : 1
+                        }}
+                        className="flex flex-col items-center z-10"
+                      >
+                        <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full shadow-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                          <Gift className="w-8 h-8 md:w-10 md:h-10 text-wedding-accent" strokeWidth={1} />
+                        </div>
+                        <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-wedding-grey mb-2">Mừng cưới</span>
+                        <h4 className="elegant-title text-wedding-ink text-lg md:text-2xl">Chú Rể</h4>
+                        <div className="mt-4 w-8 h-px bg-wedding-accent/30" />
+                      </motion.div>
+
+                      {/* Revealed Content (QR & Info) */}
+                      <AnimatePresence>
+                        {openGroomBox && (
+                          <motion.div 
+                            initial={{ opacity: 0, y: 100 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 100 }}
+                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                            className="absolute inset-0 bg-white/95 backdrop-blur-sm z-20 p-4 md:p-8 flex flex-col items-center justify-center"
+                          >
+                            <div className="w-full flex flex-col items-center">
+                              <div 
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setSelectedQR({
+                                    src: '/images/21.jpg',
+                                    name: 'QR_ChuRe.png'
+                                  });
+                                }}
+                                className="group/qr relative aspect-square w-full max-w-[140px] md:max-w-[180px] bg-white rounded-2xl p-2 shadow-lg mb-6 flex items-center justify-center border border-wedding-accent/5 cursor-pointer overflow-hidden"
+                              >
+                                <img
+                                  src="/images/21.jpg"
+                                  alt="Groom QR"
+                                  className="w-full h-full object-contain group-hover/qr:scale-110 transition-transform duration-700"
+                                />
+                                <div className="absolute inset-0 bg-wedding-ink/60 opacity-0 group-hover/qr:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                                  <ZoomIn className="w-6 h-6 text-white" />
+                                </div>
+                              </div>
+                              
+                              <div className="space-y-1 text-center">
+                                <p className="text-wedding-ink font-bold text-xs md:text-base tracking-widest uppercase">Vũ Đức Anh</p>
+                                <p className="text-wedding-grey font-serif italic text-[10px] md:text-sm">VP Bank</p>
+                                <p className="text-wedding-accent font-mono text-xs md:text-base font-bold mt-1">0355301887</p>
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
                   </div>
 
-                  <div className="lg:col-span-7">
-                    {isSubmitSuccessful ? (
+                  {/* Bride Side Card */}
+                  <div className="relative h-[280px] md:h-[380px] group">
+                    <motion.div 
+                      className="absolute inset-0 bg-wedding-sage/10 rounded-[2.5rem] border border-wedding-accent/5 flex flex-col items-center justify-center cursor-pointer overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                      onClick={() => !openBrideBox && setOpenBrideBox(true)}
+                      whileHover={{ scale: 1.01 }}
+                    >
+                      {/* Background Pattern */}
+                      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+                           style={{ backgroundImage: 'radial-gradient(circle, #2D5A27 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
+                      
+                      {/* Cover Content */}
                       <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="glass-card p-6 md:p-8 rounded-[40px] text-center shadow-2xl"
+                        animate={{ 
+                          y: openBrideBox ? -40 : 0, 
+                          opacity: openBrideBox ? 0 : 1,
+                          scale: openBrideBox ? 0.9 : 1
+                        }}
+                        className="flex flex-col items-center z-10"
                       >
-                        <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-wedding-accent/10 flex items-center justify-center mx-auto mb-4 md:mb-6">
-                          <CheckCircle2 className="w-6 h-6 md:w-8 md:h-8 text-wedding-accent" strokeWidth={1} />
+                        <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full shadow-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                          <Gift className="w-8 h-8 md:w-10 md:h-10 text-wedding-accent" strokeWidth={1} />
                         </div>
-                        <h3 className="text-2xl md:text-3xl elegant-title mb-3 text-wedding-ink">Cảm Ơn Bạn!</h3>
-                        <p className="text-wedding-ink/70 text-base font-serif font-light italic">Chúng tôi đã nhận được thông tin xác nhận của bạn. Hẹn gặp bạn tại buổi tiệc!</p>
-                        <button 
-                          onClick={() => reset()}
-                          className="mt-4 md:mt-6 aesthetic-text !text-wedding-ink/40 hover:!text-wedding-ink transition-colors underline underline-offset-8"
-                        >
-                          Gửi lại nếu có thay đổi
-                        </button>
+                        <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-wedding-grey mb-2">Mừng cưới</span>
+                        <h4 className="elegant-title text-wedding-ink text-lg md:text-2xl">Cô Dâu</h4>
+                        <div className="mt-4 w-8 h-px bg-wedding-accent/30" />
                       </motion.div>
-                    ) : (
-                      <form onSubmit={handleSubmit(onRSVP)} className="space-y-4 md:space-y-6 glass-card p-6 md:p-8 rounded-[40px] shadow-2xl">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                          <div className="space-y-1">
-                            <label className="aesthetic-text !text-wedding-ink font-bold text-xs">Họ và Tên</label>
-                            <input 
-                              {...register('name', { required: true })}
-                              className="w-full bg-transparent border-b-2 border-wedding-ink/20 px-0 py-2 focus:outline-none focus:border-wedding-accent transition-all font-serif text-base text-wedding-ink placeholder:text-wedding-ink/60"
-                              placeholder="Nhập tên của bạn..."
-                            />
-                          </div>
-                          <div className="space-y-1">
-                            <label className="aesthetic-text !text-wedding-ink font-bold text-xs">Số điện thoại</label>
-                            <input 
-                              {...register('phone')}
-                              className="w-full bg-transparent border-b-2 border-wedding-ink/20 px-0 py-2 focus:outline-none focus:border-wedding-accent transition-all font-serif text-base text-wedding-ink placeholder:text-wedding-ink/60"
-                              placeholder="Nhập số điện thoại..."
-                            />
-                          </div>
-                        </div>
 
-                        <div className="space-y-3">
-                          <label className="aesthetic-text !text-wedding-ink font-bold text-xs">Bạn là khách của ai?</label>
-                          <div className="flex gap-4">
-                            {['Nhà Trai', 'Nhà Gái'].map((side) => (
-                              <label key={side} className="flex-1 cursor-pointer group">
-                                <input 
-                                  type="radio" 
-                                  {...register('side')} 
-                                  value={side} 
-                                  className="sr-only peer"
-                                />
-                                <div className="py-2 border-2 border-wedding-ink/10 rounded-2xl text-center peer-checked:bg-wedding-accent peer-checked:border-wedding-accent peer-checked:text-white transition-all aesthetic-text !text-wedding-ink/60 peer-checked:!text-white group-hover:border-wedding-ink/30 text-sm">
-                                  {side}
-                                </div>
-                              </label>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <div className="space-y-1">
-                            <label className="aesthetic-text !text-wedding-ink font-bold text-xs">Số người tham dự</label>
-                            <div className="relative">
-                              <select 
-                                {...register('guests')}
-                                className="w-full bg-transparent border-b-2 border-wedding-ink/20 px-0 py-2 focus:outline-none focus:border-wedding-accent transition-all font-serif text-base text-wedding-ink appearance-none cursor-pointer"
-                              >
-                                {[1, 2, 3, 4, 5].map(n => (
-                                  <option key={n} value={n} className="bg-white text-wedding-ink">{n} người</option>
-                                ))}
-                              </select>
-                              <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 text-wedding-ink/40 pointer-events-none" />
-                            </div>
-                          </div>
-                          <div className="space-y-1">
-                            <label className="aesthetic-text !text-wedding-ink font-bold text-xs">Lời chúc</label>
-                            <input 
-                              {...register('message')}
-                              className="w-full bg-transparent border-b-2 border-wedding-ink/20 px-0 py-2 focus:outline-none focus:border-wedding-accent transition-all font-serif text-base text-wedding-ink placeholder:text-wedding-ink/60"
-                              placeholder="Viết lời chúc..."
-                            />
-                          </div>
-                        </div>
-
-                        {submitError && (
-                          <motion.p 
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="text-red-500 text-sm text-center font-serif italic"
+                      {/* Revealed Content (QR & Info) */}
+                      <AnimatePresence>
+                        {openBrideBox && (
+                          <motion.div 
+                            initial={{ opacity: 0, y: 100 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 100 }}
+                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                            className="absolute inset-0 bg-white/95 backdrop-blur-sm z-20 p-4 md:p-8 flex flex-col items-center justify-center"
                           >
-                            {submitError}
-                          </motion.p>
+                            <div className="w-full flex flex-col items-center">
+                              <div 
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setSelectedQR({
+                                    src: '/images/22.jpg',
+                                    name: 'QR_CoDau.png'
+                                  });
+                                }}
+                                className="group/qr relative aspect-square w-full max-w-[140px] md:max-w-[180px] bg-white rounded-2xl p-2 shadow-lg mb-6 flex items-center justify-center border border-wedding-accent/5 cursor-pointer overflow-hidden"
+                              >
+                                <img 
+                                  src="/images/22.jpg"
+                                  alt="Bride QR" 
+                                  className="w-full h-full object-contain group-hover/qr:scale-110 transition-transform duration-700"
+                                />
+                                <div className="absolute inset-0 bg-wedding-ink/60 opacity-0 group-hover/qr:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                                  <ZoomIn className="w-6 h-6 text-white" />
+                                </div>
+                              </div>
+                              
+                              <div className="space-y-1 text-center">
+                                <p className="text-wedding-ink font-bold text-xs md:text-base tracking-widest uppercase">Phạm Thị Nga</p>
+                                <p className="text-wedding-grey font-serif italic text-[10px] md:text-sm">MB Bank</p>
+                                <p className="text-wedding-accent font-mono text-xs md:text-base font-bold mt-1">0326872723</p>
+                              </div>
+                            </div>
+                          </motion.div>
                         )}
-
-                        <button 
-                          type="submit"
-                          disabled={isSubmitting}
-                          className="w-full py-4 bg-wedding-accent text-white rounded-2xl aesthetic-text !text-white hover:bg-white hover:text-wedding-ink transition-all flex items-center justify-center gap-4 disabled:opacity-50 shadow-2xl group"
-                        >
-                          {isSubmitting ? (
-                            <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          ) : (
-                            <>
-                              <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                              Gửi Xác Nhận
-                            </>
-                          )}
-                        </button>
-                      </form>
-                    )}
+                      </AnimatePresence>
+                    </motion.div>
                   </div>
                 </div>
               </div>
             </section>
 
-            {/* Wedding Gift Section */}
-            <section className="py-16 bg-[#fcfcfc] px-4">
-              <div className="max-w-4xl mx-auto text-center">
-                <SectionTitle title="Hộp Mừng Cưới" subtitle="Sự hiện diện của bạn là món quà lớn nhất, nhưng nếu bạn muốn gửi lời chúc riêng..." />
-                
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="glass-card mt-8 md:mt-12 p-4 md:p-10 rounded-[40px] border border-wedding-accent/10 max-w-2xl mx-auto"
-                >
-                  <div className="grid grid-cols-2 gap-4 md:gap-12 items-start">
-                    {/* Groom's Gift */}
-                    <div className="flex flex-col items-center">
-                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-wedding-accent/10 flex items-center justify-center mb-3 md:mb-4">
-                        <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-wedding-accent" strokeWidth={1} />
-                      </div>
-                      <h4 className="text-sm md:text-lg elegant-title text-wedding-ink mb-3 md:mb-4">Mừng Cưới Chú Rể</h4>
-                      
-                      <div 
-                        onClick={() => setSelectedQR({
-                          src: '/images/21.jpg',
-                          name: 'QR_ChuRe.png'
-                        })}
-                        className="group relative aspect-square w-full max-w-[120px] md:max-w-[140px] bg-white rounded-2xl p-2 md:p-3 shadow-inner mb-3 md:mb-4 flex items-center justify-center border border-wedding-accent/5 cursor-pointer overflow-hidden"
-                      >
-                        <img
-                            src="/images/21.jpg"
-                          alt="Groom QR"
-                          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-wedding-ink/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                          <div className="bg-white/90 p-2 md:p-3 rounded-full text-wedding-accent">
-                            <ZoomIn className="w-5 h-5 md:w-6 md:h-6" />
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="space-y-0.5 md:space-y-1 text-center">
-                        <p className="text-wedding-ink font-bold text-[10px] md:text-xs">VU DUC ANH</p>
-                        <p className="text-wedding-grey font-serif italic text-[8px] md:text-[10px]">VP Bank</p>
-                        <p className="text-wedding-accent font-mono text-[10px] md:text-xs">0355301887</p>
-                      </div>
-                    </div>
-
-                    {/* Bride's Gift */}
-                    <div className="flex flex-col items-center">
-                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-wedding-accent/10 flex items-center justify-center mb-3 md:mb-4">
-                        <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-wedding-accent" strokeWidth={1} />
-                      </div>
-                      <h4 className="text-sm md:text-lg elegant-title text-wedding-ink mb-3 md:mb-4">Mừng Cưới Cô Dâu</h4>
-                      
-                      <div 
-                        onClick={() => setSelectedQR({
-                          src:"/images/22.jpg",
-                          name: 'QR_CoDau.png'
-                        })}
-                        className="group relative aspect-square w-full max-w-[120px] md:max-w-[140px] bg-white rounded-2xl p-2 md:p-3 shadow-inner mb-3 md:mb-4 flex items-center justify-center border border-wedding-accent/5 cursor-pointer overflow-hidden"
-                      >
-                        <img 
-                          src="/images/22.jpg"
-                          alt="Bride QR" 
-                          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-wedding-ink/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                          <div className="bg-white/90 p-2 md:p-3 rounded-full text-wedding-accent">
-                            <ZoomIn className="w-5 h-5 md:w-6 md:h-6" />
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="space-y-0.5 md:space-y-1 text-center">
-                        <p className="text-wedding-ink font-bold text-[10px] md:text-xs">PHAM THI NGA</p>
-                        <p className="text-wedding-grey font-serif italic text-[8px] md:text-[10px]">MB Bank</p>
-                        <p className="text-wedding-accent font-mono text-[10px] md:text-xs">0326872723</p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </section>
-
             {/* Footer */}
-            <footer className="py-12 md:py-24 text-center px-6 bg-white border-t border-wedding-accent/5">
-              <div className="max-w-4xl mx-auto space-y-12 md:space-y-16">
+            <footer className="py-8 md:py-16 text-center px-6 bg-white border-t border-wedding-accent/5 relative overflow-hidden">
+              <BotanicalAccent className="top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30" />
+              <div className="max-w-4xl mx-auto space-y-12 md:space-y-16 relative z-10">
                 <div className="flex items-center justify-center gap-6">
                   <div className="w-16 h-px bg-wedding-accent/10" />
                   <div className="w-12 h-12 border border-wedding-accent/20 rounded-full flex items-center justify-center">
@@ -2088,9 +1911,10 @@ export default function App() {
                 </div>
 
                 <div className="pt-12">
-                  <div className="aesthetic-text !text-wedding-accent/40 tracking-wider">
+                  <div className="aesthetic-text !text-wedding-accent tracking-[0.5em] uppercase font-bold text-xs">
                     {GROOM_NAME} & {BRIDE_NAME} — 2026
                   </div>
+                  <p className="text-wedding-grey font-serif italic text-sm mt-2 opacity-60">Made by Chú Rể - Test by Cô Dâu</p>
                 </div>
               </div>
             </footer>

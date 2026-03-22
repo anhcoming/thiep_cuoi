@@ -1,7 +1,5 @@
 {
-  "name": "Remix: Remix: Thiệp Cưới Online",
+  "name": "Thiệp Cưới Online - Wedding Invitation",
   "description": "Mẫu thiệp cưới online sang trọng, hiện đại với đầy đủ thông tin và tính năng RSVP.",
-  "requestFramePermissions": [
-    "geolocation"
-  ]
+  "requestFramePermissions": []
 }
