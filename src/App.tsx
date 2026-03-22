@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from 'motion/react';
 import { 
   Heart,
   Calendar, 
@@ -34,21 +34,21 @@ function cn(...inputs: ClassValue[]) {
 }
 
 // --- Components ---
-const Watermark = ({ className }: { className?: string }) => (
+const Watermark = React.memo(({ className }: { className?: string }) => (
   <div className={cn("absolute pointer-events-none opacity-[0.03] select-none overflow-hidden text-wedding-accent", className)}>
     <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M200 40C200 40 220 100 280 100C340 100 360 40 360 40C360 40 300 60 300 120C300 180 360 200 360 200C360 200 300 220 300 280C300 340 360 360 360 360C360 360 340 300 280 300C220 300 200 360 200 360C200 360 180 300 120 300C60 300 40 360 40 360C40 360 60 300 60 240C60 180 0 160 0 160C0 160 60 140 60 80C60 20 0 0 0 0C0 0 20 60 80 60C140 60 160 0 160 0" stroke="currentColor" strokeWidth="0.5" />
     </svg>
   </div>
-);
+));
 
-const DoubleHappiness = ({ className, color = "text-red-600/10" }: { className?: string; color?: string }) => (
+const DoubleHappiness = React.memo(({ className, color = "text-red-600/10" }: { className?: string; color?: string }) => (
   <div className={cn("absolute pointer-events-none select-none font-serif", color, className)}>
     <span className="text-8xl md:text-9xl">囍</span>
   </div>
-);
+));
 
-const DecorativeAccent = ({ className, color = "#2D5A27" }: { className?: string; color?: string }) => (
+const DecorativeAccent = React.memo(({ className, color = "#2D5A27" }: { className?: string; color?: string }) => (
   <div className={cn("absolute pointer-events-none select-none", className)}>
     <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0 0C30 0 60 30 60 60" stroke={color} strokeWidth="0.5" opacity="0.2" />
@@ -58,7 +58,7 @@ const DecorativeAccent = ({ className, color = "#2D5A27" }: { className?: string
       <path d="M0 0L15 15" stroke={color} strokeWidth="0.5" opacity="0.2" />
     </svg>
   </div>
-);
+));
 
 const LaceBorder = ({ className }: { className?: string }) => (
   <div className={cn("absolute pointer-events-none select-none opacity-20", className)}>
@@ -79,7 +79,7 @@ const LaceBorder = ({ className }: { className?: string }) => (
   </div>
 );
 
-const BotanicalAccent = ({ className, color = "#2D5A27" }: { className?: string; color?: string }) => (
+const BotanicalAccent = React.memo(({ className, color = "#2D5A27" }: { className?: string; color?: string }) => (
   <div className={cn("absolute pointer-events-none select-none opacity-[0.08]", className)}>
     <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M10 110C10 110 20 60 60 40C100 20 110 10 110 10" stroke={color} strokeWidth="0.5" />
@@ -89,15 +89,15 @@ const BotanicalAccent = ({ className, color = "#2D5A27" }: { className?: string;
       <circle cx="110" cy="10" r="1.5" fill={color} />
     </svg>
   </div>
-);
+));
 
-const SectionDivider = ({ className }: { className?: string }) => (
+const SectionDivider = React.memo(({ className }: { className?: string }) => (
   <div className={cn("flex items-center justify-center gap-4 py-2", className)}>
     <div className="w-12 h-px bg-wedding-accent/20" />
     <div className="w-2 h-2 rotate-45 border border-wedding-accent/40" />
     <div className="w-12 h-px bg-wedding-accent/20" />
   </div>
-);
+));
 
 // --- Constants ---
 const getWeddingDate = () => {
@@ -356,7 +356,7 @@ const WeddingSchedule = () => {
   );
 };
 
-const CountdownTimer = () => {
+const CountdownTimer = React.memo(() => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -417,7 +417,7 @@ const CountdownTimer = () => {
       ))}
     </div>
   );
-};
+});
 
 const SectionTitle = ({ title, subtitle, align = 'center' }: { title: string; subtitle?: string; align?: 'center' | 'left' }) => (
   <div className={cn("mb-6 md:mb-10 px-4", align === 'center' ? "text-center" : "text-left")}>
@@ -959,7 +959,7 @@ const Envelope = ({ onOpen, isPlaying, onToggleMusic, playMusic }: { onOpen: () 
   );
 };
 
-const MusicDisc = ({ isPlaying, onToggleMusic }: { isPlaying: boolean; onToggleMusic: () => void }) => (
+const MusicDisc = React.memo(({ isPlaying, onToggleMusic }: { isPlaying: boolean; onToggleMusic: () => void }) => (
   <div className="relative group">
     {/* Fixed Needle Arm */}
     <div className="absolute top-0 right-0 w-6 h-8 z-30 pointer-events-none origin-top-right transition-transform duration-700" 
@@ -1023,9 +1023,9 @@ const MusicDisc = ({ isPlaying, onToggleMusic }: { isPlaying: boolean; onToggleM
       )}
     </motion.button>
   </div>
-);
+));
 
-const ScrollToTopButton = ({ onClick }: { onClick: () => void }) => {
+const ScrollToTopButton = React.memo(({ onClick }: { onClick: () => void }) => {
   const { scrollYProgress } = useScroll();
   
   return (
@@ -1060,7 +1060,7 @@ const ScrollToTopButton = ({ onClick }: { onClick: () => void }) => {
       <div className="absolute inset-1.5 rounded-full border border-wedding-accent/5" />
     </motion.button>
   );
-};
+});
 
 
 
@@ -1091,7 +1091,7 @@ const ConfigPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center p-6 font-serif">
+    <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center p-6 font-serif will-change-transform">
       <div className="max-w-md w-full glass-card p-8 rounded-[40px] shadow-2xl space-y-8">
         <div className="text-center space-y-2">
           <h1 className="text-4xl elegant-title text-wedding-accent">Cấu hình thiệp</h1>
@@ -1225,9 +1225,17 @@ export default function App() {
   const [brideHouseMapUrl, setBrideHouseMapUrl] = useState("https://www.google.com/maps/place/20%C2%B040'33.4%22N+106%C2%B001'20.8%22E/@20.6759104,106.0217952,19.04z/data=!4m4!3m3!8m2!3d20.6759524!4d106.022434!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDMxNS4wIKXMDSoASAFQAw%3D%3D");
   const [brideHouseMapText, setBrideHouseMapText] = useState("View Map");
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const { scrollYProgress } = useScroll();
+  const { scrollYProgress, scrollY } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.1], [1, 0.95]);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (latest > 500) {
+      if (!showBackToTop) setShowBackToTop(true);
+    } else {
+      if (showBackToTop) setShowBackToTop(false);
+    }
+  });
 
   const playMusic = useCallback(() => {
     if (audioRef.current && audioRef.current.paused) {
@@ -1265,16 +1273,6 @@ export default function App() {
       }
     }
 
-    const handleScroll = () => {
-      if (window.scrollY > 500) {
-        setShowBackToTop(true);
-      } else {
-        setShowBackToTop(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
     // Auto-play attempt on first interaction
     const playOnInteraction = () => {
       playMusic();
@@ -1290,7 +1288,6 @@ export default function App() {
     window.addEventListener('keydown', playOnInteraction);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('click', playOnInteraction);
       window.removeEventListener('touchstart', playOnInteraction);
       window.removeEventListener('mousedown', playOnInteraction);
@@ -1305,25 +1302,15 @@ export default function App() {
   const onRSVP = async (data: any) => {
     setSubmitError(null);
     try {
-      const response = await fetch('/api/rsvp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to send RSVP');
-      }
-
-      console.log('RSVP Success:', data);
+      // Client-only RSVP: Just show success and reset
+      console.log('RSVP Success (Client-only):', data);
       confetti({
         particleCount: 150,
         spread: 70,
         origin: { y: 0.6 },
         colors: ['#2D5A27', '#FFFFFF', '#6B7280']
       });
+      reset();
     } catch (error) {
       console.error('RSVP Error:', error);
       setSubmitError('Có lỗi xảy ra khi gửi xác nhận. Vui lòng thử lại sau.');
@@ -1439,10 +1426,10 @@ export default function App() {
             </AnimatePresence>
 
             {/* Hero Section */}
-            <section className="relative min-h-screen flex flex-col items-center justify-between overflow-hidden bg-white md:max-h-[700px]">
+            <section className="relative min-h-screen flex flex-col items-center justify-between overflow-hidden bg-white md:max-h-[700px] transform-gpu">
               <motion.div 
                 style={{ opacity, scale }}
-                className="absolute inset-0 z-0"
+                className="absolute inset-0 z-0 will-change-transform"
               >
                 <img 
                   src="/images/6.jpg"
@@ -1903,11 +1890,58 @@ export default function App() {
                   <div className="w-16 h-px bg-wedding-accent/10" />
                 </div>
                 
-                <div className="space-y-6">
-                  <h2 className="text-3xl md:text-7xl elegant-title text-wedding-ink">Trân Trọng Cảm Ơn</h2>
-                  <p className="text-wedding-grey font-serif font-light text-lg md:text-xl italic leading-relaxed max-w-xl mx-auto">
-                    Sự hiện diện của bạn là niềm vinh dự to lớn và là món quà ý nghĩa nhất dành cho chúng tôi.
-                  </p>
+                <div className="space-y-8 relative">
+                  <motion.div
+                    initial={{ scale: 0, rotate: -15 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.3 }}
+                    className="flex justify-center mb-2"
+                  >
+                    <div className="relative">
+                      <Heart className="w-16 h-16 text-wedding-accent/10 fill-wedding-accent/5" />
+                      <Heart className="w-8 h-8 text-wedding-accent absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fill-wedding-accent shadow-sm" />
+                      
+                      {/* Floating particles */}
+                      <motion.div 
+                        animate={{ y: [-10, -30], opacity: [0, 1, 0], x: [-5, 5] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                        className="absolute -top-2 left-1/4 w-1 h-1 bg-wedding-accent rounded-full"
+                      />
+                      <motion.div 
+                        animate={{ y: [-5, -25], opacity: [0, 1, 0], x: [5, -5] }}
+                        transition={{ duration: 2.5, repeat: Infinity, delay: 1.2 }}
+                        className="absolute -top-4 right-1/4 w-1.5 h-1.5 bg-wedding-accent/40 rounded-full"
+                      />
+                    </div>
+                  </motion.div>
+                  
+                  <div className="space-y-6">
+                    <motion.h2 
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      className="text-4xl md:text-7xl elegant-title text-wedding-ink"
+                    >
+                      Trân Trọng Cảm Ơn
+                    </motion.h2>
+                    <motion.div 
+                      initial={{ width: 0 }}
+                      whileInView={{ width: "120px" }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: 0.5 }}
+                      className="h-px bg-gradient-to-r from-transparent via-wedding-accent/40 to-transparent mx-auto"
+                    />
+                    <motion.p 
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: 0.7 }}
+                      className="text-wedding-grey font-serif font-light text-lg md:text-xl italic leading-relaxed max-w-xl mx-auto px-4"
+                    >
+                      "Sự hiện diện của bạn là niềm vinh dự to lớn và là món quà ý nghĩa nhất dành cho chúng tôi trong ngày trọng đại này."
+                    </motion.p>
+                  </div>
                 </div>
 
                 <div className="pt-12">
