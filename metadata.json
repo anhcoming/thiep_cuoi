@@ -1,0 +1,7 @@
+{
+  "name": "Remix: Remix: Thiệp Cưới Online",
+  "description": "Mẫu thiệp cưới online sang trọng, hiện đại với đầy đủ thông tin và tính năng RSVP.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
